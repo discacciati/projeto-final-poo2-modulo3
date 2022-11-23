@@ -22,6 +22,10 @@ public class Imovel {
 
     private Agenda agenda;
 
+    public Imovel (){
+
+    }
+
     public Imovel(int id, String nome, Endereco endereco, Proprietario proprietario, Locatario locatario, Corretor corretor, Agenda agenda) {
         this.id = id;
         this.nome = nome;
@@ -30,6 +34,31 @@ public class Imovel {
         this.locatario = locatario;
         this.corretor = corretor;
         this.agenda = agenda;
+    }
+
+    public Imovel endereco(Endereco endereco){
+        this.endereco = endereco;
+        return this;
+    }
+
+    public Imovel corretor(Corretor corretor){
+        this.corretor = corretor;
+        return this;
+    }
+
+    public Imovel locatario(Locatario locatario){
+        this.locatario = locatario;
+        return this;
+    }
+
+    public Imovel proprietario(Proprietario proprietario){
+        this.proprietario = proprietario;
+        return this;
+    }
+
+    public Imovel agenda(Agenda agenda){
+        this.agenda = agenda;
+        return this;
     }
 
     public Imovel id(int id){

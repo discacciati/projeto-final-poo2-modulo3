@@ -26,6 +26,8 @@ public class TesteDinamicoImobiliaria {
 
         int sequence = ImovelRepository.sequence;
 
+        Imovel novoApartamento = null;
+
         do {
             System.out.println("  Bem-vindo ao sistema da Imobiliária POO  ");
             System.out.println(" Selecione a opção desejada: ");
@@ -39,7 +41,7 @@ public class TesteDinamicoImobiliaria {
 
             switch (opcaoSelecionada) {
                 case 1:
-                    novocadastro(scanner, imovelRepository);
+                    novoApartamento = novocadastro(scanner, imovelRepository);
                     break;
                 case 2:
                     imovelRepository.imprimirImoveisCadastrados();
@@ -63,30 +65,30 @@ public class TesteDinamicoImobiliaria {
 
         String valorAluguel = "1.200,00";
 
-       // Apartamento apartamentoAlugado = imovelRepository[0];
+        Imovel apartamentoAlugado = novoApartamento;
 
-       // AssinadoraContrato novoContrato = new AssinadoraContrato(assinaturaProprietario, assinaturaLocatario, valorAluguel, apartamentoAlugado);
+        AssinadoraContrato novoContrato = new AssinadoraContrato(assinaturaProprietario, assinaturaLocatario, apartamentoAlugado, valorAluguel);
 
         //Testando Agendar visita e enviar email de agendamento
 
         EnumDiasSemana diaSemana = EnumDiasSemana.SEGUNDA;
 
-       // apartamentoAlugado.getAgenda().agendarVisita(apartamentoAlugado, diaSemana);
+        apartamentoAlugado.getAgenda().agendarVisita(apartamentoAlugado, diaSemana);
 
         // Testando relatórios
 
         Relatorios<Imovel> relatorioApartamento = new Relatorios<>();
 
-       // relatorioApartamento.gerarRelatorioIndividual(apartamentoAlugado);
+        relatorioApartamento.gerarRelatorioIndividual(apartamentoAlugado);
 
-       // List<Imovel> imoveisCadastrados = List.of(apartamentoAlugado);
+        // List<Imovel> imoveisCadastrados = List.of(apartamentoAlugado);
 
-       // relatorioApartamento.gerarRelatorioEmLote(imoveisCadastrados);
+        // relatorioApartamento.gerarRelatorioEmLote(imoveisCadastrados);
 
 
     }
 
-    public static void novocadastro(Scanner scanner, ImovelRepository imovelRepository) {
+    public static Imovel novocadastro(Scanner scanner, ImovelRepository imovelRepository) {
 
         System.out.println("___________ CADASTRO DE NOVO IMÓVEL ______________");
 
@@ -107,31 +109,31 @@ public class TesteDinamicoImobiliaria {
                     System.out.println(" Nome para o imóvel: ");
                     String nomeApartamento = scanner.next();
                     System.out.println(" Quantos quartos: ");
-                    String quartosApartamento = scanner.next();
+                    int quartosApartamento = scanner.nextInt();
                     System.out.println(" Quantos banheiros: ");
-                    String banheiroApartamento = scanner.next();
+                    int banheiroApartamento = scanner.nextInt();
                     System.out.println(" Qual andar: ");
-                    String andarApartamento = scanner.next();
+                    int andarApartamento = scanner.nextInt();
                     System.out.println(" Qual tamanho do imóvel, em m2: ");
-                    String tamanhoApartamento = scanner.next();
+                    int tamanhoApartamento = scanner.nextInt();
                     System.out.println(" É nascente ? Responder True ou False ");
-                    String nascenteApartamento = scanner.next();
+                    boolean nascenteApartamento = scanner.nextBoolean();
                     System.out.println(" Possui churrasqueira ? Responder True ou False ");
-                    String churrasqueiraApartamento = scanner.next();
+                    boolean churrasqueiraApartamento = scanner.nextBoolean();
                     System.out.println(" Possui piscina ? Responder True ou False ");
-                    String piscinaApartamento = scanner.next();
+                    boolean piscinaApartamento = scanner.nextBoolean();
                     System.out.println("Possui garagem ? Responder True ou False ");
-                    String garagemApartamento = scanner.next();
+                    boolean garagemApartamento = scanner.nextBoolean();
                     System.out.println(" Possui área de serviço ? Responder True ou False  ");
-                    String areaServicoApartamento = scanner.next();
+                    boolean areaServicoApartamento = scanner.nextBoolean();
                     System.out.println(" Possui área de lazer ? Responder True ou False ");
-                    String areaLazerApartamento = scanner.next();
+                    boolean areaLazerApartamento = scanner.nextBoolean();
                     System.out.println("Possui academia ? Responder True ou False ");
-                    String academiaApartamento = scanner.next();
+                    boolean academiaApartamento = scanner.nextBoolean();
                     System.out.println("Possui salão de festas ? Responder True ou False ");
-                    String salaoFestaApartamento = scanner.next();
+                    boolean salaoFestaApartamento = scanner.nextBoolean();
                     System.out.println(" Possui espaço kids ? Responder True ou False  ");
-                    String espacoKidsApartamento = scanner.next();
+                    boolean espacoKidsApartamento = scanner.nextBoolean();
 
                     System.out.println("Digite as informações do endereço do imóvel:");
                     System.out.println(" CEP do imóvel: ");
@@ -150,6 +152,7 @@ public class TesteDinamicoImobiliaria {
                     String complementoApartamento = scanner.next();
 
                     Endereco enderecoImovel = new Endereco()
+                            .id(idApartamento)
                             .cep(cepApartamento)
                             .estado(estadoApartamento)
                             .cidade(cidadeApartamento)
@@ -192,6 +195,7 @@ public class TesteDinamicoImobiliaria {
                     String complementoCorretorApartamento = scanner.next();
 
                     Endereco enderecoCorretor = new Endereco()
+                            .id(idApartamento)
                             .cep(cepCorretorApartamento)
                             .estado(estadoCorretorApartamento)
                             .cidade(cidadeCorretorApartamento)
@@ -209,6 +213,7 @@ public class TesteDinamicoImobiliaria {
                             .telefone(telefoneCorretorApartamento)
                             .profissao(profissaoCorretorApartamento)
                             .conjuge(conjugeCorretorApartamento)
+                            .endereco(enderecoCorretor)
                             .builder();
 
                     System.out.println("Digite as informações sobre o proprietário do imóvel:");
@@ -244,6 +249,7 @@ public class TesteDinamicoImobiliaria {
                     String complementoProprietarioApartamento = scanner.next();
 
                     Endereco enderecoProprietario = new Endereco()
+                            .id(idApartamento)
                             .cep(cepProprietarioApartamento)
                             .estado(estadoProprietarioApartamento)
                             .cidade(cidadeProprietarioApartamento)
@@ -261,6 +267,7 @@ public class TesteDinamicoImobiliaria {
                             .telefone(telefoneProprietarioApartamento)
                             .profissao(profissaoProprietarioApartamento)
                             .conjuge(conjugeProprietarioApartamento)
+                            .endereco(enderecoProprietario)
                             .builder();
 
                     System.out.println("Digite as informações sobre o locatário do imóvel:");
@@ -296,6 +303,7 @@ public class TesteDinamicoImobiliaria {
                     String complementoLocatarioApartamento = scanner.next();
 
                     Endereco enderecoLocatario = new Endereco()
+                            .id(idApartamento)
                             .cep(cepLocatarioApartamento)
                             .estado(estadoLocatarioApartamento)
                             .cidade(cidadeLocatarioApartamento)
@@ -313,24 +321,50 @@ public class TesteDinamicoImobiliaria {
                             .telefone(telefoneLocatarioApartamento)
                             .profissao(profissaoLocatarioApartamento)
                             .conjuge(conjugeLocatarioApartamento)
+                            .endereco(enderecoLocatario)
                             .builder();
 
                     Agenda agendaApartamento = new Agenda();
 
-                    Ap
+                    Apartamento novoApartamento = (Apartamento) new Apartamento()
+                            .quartos(quartosApartamento)
+                            .andar(andarApartamento)
+                            .areaLazer(areaLazerApartamento)
+                            .academia(academiaApartamento)
+                            .areaServico(areaServicoApartamento)
+                            .banheiros(banheiroApartamento)
+                            .churrasqueira(churrasqueiraApartamento)
+                            .espacoKids(espacoKidsApartamento)
+                            .garagem(garagemApartamento)
+                            .nascente(nascenteApartamento)
+                            .salaoFesta(salaoFestaApartamento)
+                            .piscina(piscinaApartamento)
+                            .tamanho(tamanhoApartamento)
+                            .nome(nomeApartamento)
+                            .endereco(enderecoImovel)
+                            .corretor(corretorDadosPessoais)
+                            .proprietario(proprietarioDadosPessoais)
+                            .locatario(locatarioDadosPessoais)
+                            .agenda(agendaApartamento)
+                            .build();
 
+                    System.out.println("Cadastro realizado com sucesso");
 
-                    break;
+                    System.out.println(nomeApartamento);
+
+                    return novoApartamento;
+
                 case 2:
                     int idCasa = ImovelRepository.sequence;
 
-                    break;
+                    return null;
                 default:
                     System.out.println("Opção inválida");
-                    break;
+                    return null;
             }
 
 
-        } while (opcaoImovel != 1 || opcaoImovel != 2);
+        } while (opcaoImovel != 1 | opcaoImovel != 2);
+
     }
 }

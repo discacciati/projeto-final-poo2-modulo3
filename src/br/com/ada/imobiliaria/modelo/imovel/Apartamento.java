@@ -36,6 +36,9 @@ public class Apartamento extends Imovel implements Alugado{
 
     private boolean espacoKids;
 
+    public Apartamento(){
+        super();
+    }
     public Apartamento(int id, String nome, Endereco endereco, Proprietario proprietario, Locatario locatario, Corretor corretor, Agenda agenda, int quartos, int banheiros, int tamanho, int andar, boolean nascente, boolean churrasqueira, boolean piscina, boolean garagem, boolean areaServico, boolean areaLazer, boolean academia, boolean salaoFesta, boolean espacoKids) {
         super(id, nome, endereco, proprietario, locatario, corretor, agenda);
         this.alugado = alugado;
@@ -124,9 +127,9 @@ public class Apartamento extends Imovel implements Alugado{
         int id = getId();
         String nome = getNome();
         Endereco endereco = getEndereco();
-        Proprietario proprietario = getProprietario();
-        Locatario locatario = getLocatario();
         Corretor corretor = getCorretor();
+        Locatario locatario = getLocatario();
+        Proprietario proprietario = getProprietario();
         Agenda agenda = getAgenda();
 
         Apartamento apartamentoCriado = new Apartamento( id, nome, endereco, proprietario, locatario, corretor, agenda, quartos, banheiros, tamanho, andar, nascente, piscina, churrasqueira, garagem, areaServico, areaLazer, academia, salaoFesta, espacoKids);

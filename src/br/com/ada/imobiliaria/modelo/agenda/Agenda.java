@@ -14,16 +14,16 @@ public class Agenda {
     private EnumDiasSemana diadaSemana;
 
 
-    private List<Imovel> agendaImovel = new ArrayList<>(7);
+    private List agendaImovel ;
 
     public Agenda(){
         this.agendaImovel = new ArrayList<>(7);
     }
 
-    public Agenda(int id, EnumDiasSemana diadaSemana, List<Imovel> agendaImovel) {
+    public Agenda(int id, EnumDiasSemana diadaSemana) {
         this.id = id;
         this.diadaSemana = diadaSemana;
-        this.agendaImovel = agendaImovel;
+        this.agendaImovel = new ArrayList<>(7);
     }
 
     public Agenda id(int id){
@@ -42,7 +42,7 @@ public class Agenda {
     }
 
     public Agenda builder(){
-        Agenda agendaCriada = new Agenda(id, diadaSemana, agendaImovel);
+        Agenda agendaCriada = new Agenda(id, diadaSemana);
         return agendaCriada;
     }
 
@@ -131,7 +131,7 @@ public class Agenda {
                     dia = "Sábado";
                     break;
             }
-            System.out.println("Agenda de "+ dia + " " + agendaImovel.get(i));
+            System.out.println("Agenda de "+ dia + " " + agendaImovel.get(i) );
         }
     }
 

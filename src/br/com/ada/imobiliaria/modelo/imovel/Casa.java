@@ -28,6 +28,10 @@ public class Casa extends Imovel implements Alugado {
 
     private boolean areaLazer;
 
+    public Casa(){
+        super();
+    }
+
     public Casa(int id, String nome, Endereco endereco, Proprietario proprietario, Locatario locatario, Corretor corretor, Agenda agenda, int quartos, int banheiros, int tamanho, int andar, boolean piscina, boolean churrasqueira, int garagemQuantosCarros, boolean areaServico, boolean areaLazer) {
         super(id, nome, endereco, proprietario, locatario, corretor, agenda);
         this.alugado = alugado;

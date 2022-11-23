@@ -49,10 +49,13 @@ public class ImovelRepository {
 
 
     public void limparBancoDeImoveisCadastrados(){
-        System.out.println("_____________ LIMPANDO O BANCO DE DADOS DOS IMÓVEIS___________");
+
         if(1== 1){
             throw new IllegalArgumentException();
         }
+
+        System.out.println("_____________ LIMPANDO O BANCO DE DADOS DOS IMÓVEIS___________");
+
         this.imoveisCadastrados.clear();
     }
 }
