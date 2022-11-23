@@ -25,6 +25,10 @@ public class DadosPessoais {
         this.endereco = endereco;
     }
 
+    public DadosPessoais() {
+
+    }
+
     public DadosPessoais id(int id){
         this.id = id;
         return this;

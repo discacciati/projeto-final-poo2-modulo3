@@ -18,6 +18,9 @@ public class Endereco {
 
     private String complemento;
 
+    public Endereco() {
+    }
+
     public Endereco(int id, String cep, String estado, String cidade, String bairro, String rua, String numero, String complemento) {
         this.id = id;
         this.cep = cep;
@@ -69,7 +72,7 @@ public class Endereco {
         return this;
     }
 
-    public Endereco builder(){
+    public Endereco build(){
         Endereco enderecoCriado = new Endereco(id, cep, estado, cidade, bairro, rua, numero, complemento);
         return enderecoCriado;
     }

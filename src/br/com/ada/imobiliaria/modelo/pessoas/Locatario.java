@@ -11,6 +11,10 @@ public class Locatario extends DadosPessoais {
 
     private String email;
 
+    public Locatario(){
+        super();
+    }
+
     public Locatario(int id, String cpf, String telefone, String profissao, String conjuge, Endereco endereco, String nome, String sobrenome, String email) {
         super(id, cpf, telefone, profissao, conjuge, endereco);
         this.nome = nome;

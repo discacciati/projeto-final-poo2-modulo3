@@ -10,6 +10,11 @@ public class Proprietario extends  DadosPessoais {
 
     private String email;
 
+    public Proprietario() {
+        super( );
+
+    }
+
     public Proprietario(int id, String cpf, String telefone, String profissao, String conjuge, Endereco endereco, String nome, String sobrenome, String email) {
         super(id, cpf, telefone, profissao, conjuge, endereco);
         this.nome = nome;

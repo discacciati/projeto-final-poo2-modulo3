@@ -2,9 +2,14 @@ package br.com.ada.imobiliaria.teste;
 
 import br.com.ada.imobiliaria.businessobject.Relatorios;
 import br.com.ada.imobiliaria.enumeracao.EnumDiasSemana;
+import br.com.ada.imobiliaria.modelo.agenda.Agenda;
 import br.com.ada.imobiliaria.modelo.contrato.AssinadoraContrato;
+import br.com.ada.imobiliaria.modelo.endereco.Endereco;
 import br.com.ada.imobiliaria.modelo.imovel.Apartamento;
 import br.com.ada.imobiliaria.modelo.imovel.Imovel;
+import br.com.ada.imobiliaria.modelo.pessoas.Corretor;
+import br.com.ada.imobiliaria.modelo.pessoas.Locatario;
+import br.com.ada.imobiliaria.modelo.pessoas.Proprietario;
 import br.com.ada.imobiliaria.repository.ImovelRepository;
 
 import java.util.List;
@@ -49,7 +54,7 @@ public class TesteDinamicoImobiliaria {
                     System.out.println("Opção inválida!");
                     break;
             }
-        }while (opcaoSelecionada != SAIR_DO_SISTEMA);
+        } while (opcaoSelecionada != SAIR_DO_SISTEMA);
 
         // Testando assinatura do contrato
         String assinaturaProprietario = "Joao da Silva";
@@ -58,46 +63,46 @@ public class TesteDinamicoImobiliaria {
 
         String valorAluguel = "1.200,00";
 
-        Apartamento apartamentoAlugado =  imovelRepository[0];
+       // Apartamento apartamentoAlugado = imovelRepository[0];
 
-        AssinadoraContrato novoContrato = new AssinadoraContrato(assinaturaProprietario, assinaturaLocatario, valorAluguel, apartamentoAlugado);
+       // AssinadoraContrato novoContrato = new AssinadoraContrato(assinaturaProprietario, assinaturaLocatario, valorAluguel, apartamentoAlugado);
 
         //Testando Agendar visita e enviar email de agendamento
 
         EnumDiasSemana diaSemana = EnumDiasSemana.SEGUNDA;
 
-        apartamentoAlugado.getAgenda().agendarVisita(apartamentoAlugado, diaSemana);
+       // apartamentoAlugado.getAgenda().agendarVisita(apartamentoAlugado, diaSemana);
 
         // Testando relatórios
 
         Relatorios<Imovel> relatorioApartamento = new Relatorios<>();
 
-        relatorioApartamento.gerarRelatorioIndividual(apartamentoAlugado);
+       // relatorioApartamento.gerarRelatorioIndividual(apartamentoAlugado);
 
-        List<Imovel> imoveisCadastrados = List.of(apartamentoAlugado, casaAlugada);
+       // List<Imovel> imoveisCadastrados = List.of(apartamentoAlugado);
 
-        relatorioApartamento.gerarRelatorioEmLote(imoveisCadastrados);
+       // relatorioApartamento.gerarRelatorioEmLote(imoveisCadastrados);
 
 
     }
 
-    public static void novocadastro(Scanner scanner, ImovelRepository imovelRepository){
+    public static void novocadastro(Scanner scanner, ImovelRepository imovelRepository) {
 
         System.out.println("___________ CADASTRO DE NOVO IMÓVEL ______________");
 
-        int opcaoImovel = 0 ;
+        int opcaoImovel = 0;
 
-        do{
-        System.out.println("Digite a opção do imóvel que será cadastrado:");
-        System.out.println(" 1 - Apartamento ");
-        System.out.println(" 2 - Casa ");
+        do {
+            System.out.println("Digite a opção do imóvel que será cadastrado:");
+            System.out.println(" 1 - Apartamento ");
+            System.out.println(" 2 - Casa ");
 
-        opcaoImovel= scanner.nextInt();
+            opcaoImovel = scanner.nextInt();
 
             switch (opcaoImovel) {
 
                 case 1:
-                    int idApartamento = ImovelRepository.sequence ;
+                    int idApartamento = ImovelRepository.sequence;
                     System.out.println("Digite as informações do imóvel:");
                     System.out.println(" Nome para o imóvel: ");
                     String nomeApartamento = scanner.next();
@@ -144,20 +149,30 @@ public class TesteDinamicoImobiliaria {
                     System.out.println(" Complemento imóvel: ");
                     String complementoApartamento = scanner.next();
 
+                    Endereco enderecoImovel = new Endereco()
+                            .cep(cepApartamento)
+                            .estado(estadoApartamento)
+                            .cidade(cidadeApartamento)
+                            .bairro(bairroApartamento)
+                            .rua(ruaApartamento)
+                            .numero(numeroApartamento)
+                            .complemento(complementoApartamento)
+                            .build();
+
                     System.out.println("Digite as informações sobre o corretor do imóvel:");
                     System.out.println(" Primeiro Nome: ");
                     String nomeCorretorApartamento = scanner.next();
-                    System.out.println(" Estado do imóvel: ");
+                    System.out.println(" Sobrenome: ");
                     String sobrenomeCorretorApartamento = scanner.next();
-                    System.out.println(" Cidade do imóvel: ");
+                    System.out.println(" E-mail: ");
                     String emailCorretorApartamento = scanner.next();
-                    System.out.println(" Bairro do imóvel: ");
+                    System.out.println(" CPF: ");
                     String cpfCorretorApartamento = scanner.next();
-                    System.out.println(" Rua do  imóvel: ");
+                    System.out.println(" Telefone: ");
                     String telefoneCorretorApartamento = scanner.next();
-                    System.out.println(" Numero do imóvel: ");
+                    System.out.println(" Profissão: ");
                     String profissaoCorretorApartamento = scanner.next();
-                    System.out.println(" Complemento imóvel: ");
+                    System.out.println(" Conjuge: ");
                     String conjugeCorretorApartamento = scanner.next();
 
                     System.out.println("Digite as informações do endereço do Corretor do imóvel:");
@@ -176,59 +191,146 @@ public class TesteDinamicoImobiliaria {
                     System.out.println(" Complemento: ");
                     String complementoCorretorApartamento = scanner.next();
 
+                    Endereco enderecoCorretor = new Endereco()
+                            .cep(cepCorretorApartamento)
+                            .estado(estadoCorretorApartamento)
+                            .cidade(cidadeCorretorApartamento)
+                            .bairro(bairroCorretorApartamento)
+                            .rua(ruaCorretorApartamento)
+                            .numero(numeroCorretorApartamento)
+                            .complemento(complementoCorretorApartamento)
+                            .build();
+
+                    Corretor corretorDadosPessoais = (Corretor) new Corretor()
+                            .nome(nomeCorretorApartamento)
+                            .sobrenome(sobrenomeCorretorApartamento)
+                            .email(emailCorretorApartamento)
+                            .cpf(cpfCorretorApartamento)
+                            .telefone(telefoneCorretorApartamento)
+                            .profissao(profissaoCorretorApartamento)
+                            .conjuge(conjugeCorretorApartamento)
+                            .builder();
+
+                    System.out.println("Digite as informações sobre o proprietário do imóvel:");
+                    System.out.println(" Primeiro Nome: ");
+                    String nomeProprietarioApartamento = scanner.next();
+                    System.out.println(" Sobrenome: ");
+                    String sobrenomeProprietarioApartamento = scanner.next();
+                    System.out.println(" E-mail: ");
+                    String emailProprietarioApartamento = scanner.next();
+                    System.out.println(" CPF: ");
+                    String cpfProprietarioApartamento = scanner.next();
+                    System.out.println(" Telefone: ");
+                    String telefoneProprietarioApartamento = scanner.next();
+                    System.out.println(" Profissão: ");
+                    String profissaoProprietarioApartamento = scanner.next();
+                    System.out.println(" Conjuge: ");
+                    String conjugeProprietarioApartamento = scanner.next();
+
+                    System.out.println("Digite as informações do endereço do Proprietario do imóvel:");
+                    System.out.println(" CEP: ");
+                    String cepProprietarioApartamento = scanner.next();
+                    System.out.println(" Estado: ");
+                    String estadoProprietarioApartamento = scanner.next();
+                    System.out.println(" Cidade: ");
+                    String cidadeProprietarioApartamento = scanner.next();
+                    System.out.println(" Bairro: ");
+                    String bairroProprietarioApartamento = scanner.next();
+                    System.out.println(" Rua: ");
+                    String ruaProprietarioApartamento = scanner.next();
+                    System.out.println(" Número: ");
+                    String numeroProprietarioApartamento = scanner.next();
+                    System.out.println(" Complemento: ");
+                    String complementoProprietarioApartamento = scanner.next();
+
+                    Endereco enderecoProprietario = new Endereco()
+                            .cep(cepProprietarioApartamento)
+                            .estado(estadoProprietarioApartamento)
+                            .cidade(cidadeProprietarioApartamento)
+                            .bairro(bairroProprietarioApartamento)
+                            .rua(ruaProprietarioApartamento)
+                            .numero(numeroProprietarioApartamento)
+                            .complemento(complementoProprietarioApartamento)
+                            .build();
+
+                    Proprietario proprietarioDadosPessoais = (Proprietario) new Proprietario()
+                            .nome(nomeProprietarioApartamento)
+                            .sobrenome(sobrenomeProprietarioApartamento)
+                            .email(emailProprietarioApartamento)
+                            .cpf(cpfProprietarioApartamento)
+                            .telefone(telefoneProprietarioApartamento)
+                            .profissao(profissaoProprietarioApartamento)
+                            .conjuge(conjugeProprietarioApartamento)
+                            .builder();
+
+                    System.out.println("Digite as informações sobre o locatário do imóvel:");
+                    System.out.println(" Primeiro Nome: ");
+                    String nomeLocatarioApartamento = scanner.next();
+                    System.out.println(" Sobrenome: ");
+                    String sobrenomeLocatarioApartamento = scanner.next();
+                    System.out.println(" E-mail: ");
+                    String emailLocatarioApartamento = scanner.next();
+                    System.out.println(" CPF: ");
+                    String cpfLocatarioApartamento = scanner.next();
+                    System.out.println(" Telefone: ");
+                    String telefoneLocatarioApartamento = scanner.next();
+                    System.out.println(" Profissão: ");
+                    String profissaoLocatarioApartamento = scanner.next();
+                    System.out.println(" Conjuge: ");
+                    String conjugeLocatarioApartamento = scanner.next();
+
+                    System.out.println("Digite as informações do endereço do Locatario do imóvel:");
+                    System.out.println(" CEP: ");
+                    String cepLocatarioApartamento = scanner.next();
+                    System.out.println(" Estado: ");
+                    String estadoLocatarioApartamento = scanner.next();
+                    System.out.println(" Cidade: ");
+                    String cidadeLocatarioApartamento = scanner.next();
+                    System.out.println(" Bairro: ");
+                    String bairroLocatarioApartamento = scanner.next();
+                    System.out.println(" Rua: ");
+                    String ruaLocatarioApartamento = scanner.next();
+                    System.out.println(" Número: ");
+                    String numeroLocatarioApartamento = scanner.next();
+                    System.out.println(" Complemento: ");
+                    String complementoLocatarioApartamento = scanner.next();
+
+                    Endereco enderecoLocatario = new Endereco()
+                            .cep(cepLocatarioApartamento)
+                            .estado(estadoLocatarioApartamento)
+                            .cidade(cidadeLocatarioApartamento)
+                            .bairro(bairroLocatarioApartamento)
+                            .rua(ruaLocatarioApartamento)
+                            .numero(numeroLocatarioApartamento)
+                            .complemento(complementoLocatarioApartamento)
+                            .build();
+
+                    Locatario locatarioDadosPessoais = (Locatario) new Locatario()
+                            .nome(nomeLocatarioApartamento)
+                            .sobrenome(sobrenomeLocatarioApartamento)
+                            .email(emailLocatarioApartamento)
+                            .cpf(cpfLocatarioApartamento)
+                            .telefone(telefoneLocatarioApartamento)
+                            .profissao(profissaoLocatarioApartamento)
+                            .conjuge(conjugeLocatarioApartamento)
+                            .builder();
+
+                    Agenda agendaApartamento = new Agenda();
+
+                    Ap
+
 
                     break;
                 case 2:
-                    int idCasa = ImovelRepository.sequence ;
+                    int idCasa = ImovelRepository.sequence;
 
                     break;
                 default:
                     System.out.println("Opção inválida");
                     break;
-        } while ( opcaoImovel != 1 || opcaoImovel != 2);
+            }
 
 
-
-
-
-
-
-
-        System.out.println("Digite seu nome:");
-        String nome = scanner.next();
-
-        System.out.println("######## Informe os dados do seus endere�o... ########");
-
-        System.out.println("Digite sua rua:");
-        String rua = scanner.next();
-
-        System.out.println("Digite o numero da sua casa:");
-        String numero = scanner.next();
-
-        System.out.println("Digite o seu cep:");
-        String cep = scanner.next();
-
-        System.out.println("Digite seu bairro:");
-        String bairro = scanner.next();
-
-        System.out.println("Digite seu estado ende mora:");
-        String estado = scanner.next();
-
-        System.out.println("######## Agora � hora de informar os dados do seu C�ozinho... ########");
-
-        System.out.println("Digite o nome do seu C�o:");
-        String nomeCachorro = scanner.next();
-
-        System.out.println("Digite a raca:");
-        String raca = scanner.next();
-
-        System.out.println("Digite a idade:");
-        int idade = scanner.nextInt();
-
-
-
+        } while (opcaoImovel != 1 || opcaoImovel != 2);
     }
-
-
-
 }

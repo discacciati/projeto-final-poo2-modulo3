@@ -16,6 +16,10 @@ public class Agenda {
 
     private List<Imovel> agendaImovel = new ArrayList<>(7);
 
+    public Agenda(){
+        this.agendaImovel = new ArrayList<>(7);
+    }
+
     public Agenda(int id, EnumDiasSemana diadaSemana, List<Imovel> agendaImovel) {
         this.id = id;
         this.diadaSemana = diadaSemana;

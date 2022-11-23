@@ -10,11 +10,17 @@ public class Corretor extends DadosPessoais {
 
     private String email;
 
+
+
     public Corretor(int id, String cpf, String telefone, String profissao, String conjuge, Endereco endereco, String nome, String sobrenome, String email) {
         super(id, cpf, telefone, profissao, conjuge, endereco);
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.email = email;
+    }
+
+    public Corretor() {
+        super();
     }
 
     public Corretor nome(String nome){
